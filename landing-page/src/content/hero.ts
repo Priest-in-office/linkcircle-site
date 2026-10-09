@@ -11,5 +11,5 @@ export const highlights = [
   { label: 'Video calls', icon: 'video' },
   { label: 'Audio calls', icon: 'mic' },
   { label: 'Real people', icon: 'person' },
-  { label: 'Secure booking', icon: 'lock' },
+  { label: 'Secure booking at launch', icon: 'lock' },
 ] as const

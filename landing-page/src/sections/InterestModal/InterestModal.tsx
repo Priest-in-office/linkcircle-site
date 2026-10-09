@@ -5,6 +5,7 @@ import { Modal } from '../../components/Modal/Modal'
 import { SuccessMark } from '../../components/SuccessMark/SuccessMark'
 import { formSuccessTitle, interestForms, type InterestFormKind } from '../../content/forms'
 import { submitForm } from '../../lib/submitForm'
+import { PrivacyNote } from '../PrivacyNote/PrivacyNote'
 import styles from './InterestModal.module.css'
 
 const TITLE_ID = 'interest-modal-title'
@@ -46,6 +47,7 @@ export function InterestModal({ kind, onClose }: { kind: InterestFormKind; onClo
             <Button type="submit" block className={styles.submit}>
               {form.submitLabel}
             </Button>
+            <PrivacyNote />
           </form>
         </>
       )}

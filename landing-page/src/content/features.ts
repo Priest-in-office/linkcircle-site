@@ -1,5 +1,5 @@
 export const features = {
-  eyebrow: 'What you can do',
+  eyebrow: "What you'll be able to do",
   titleLines: ['Someone to talk to,', 'on your terms.'],
   /** `icon` is a Material Symbols ligature name. */
   items: [

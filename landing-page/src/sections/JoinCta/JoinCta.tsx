@@ -5,9 +5,10 @@ import { Reveal, RevealLine } from '../../components/Reveal/Reveal'
 import { Section } from '../../components/Section/Section'
 import { SuccessMark } from '../../components/SuccessMark/SuccessMark'
 import { waitlist } from '../../content/forms'
-import { cta, legalLinks, sectionIds } from '../../content/site'
+import { cta, sectionIds } from '../../content/site'
 import { useInView } from '../../hooks/useInView'
 import { submitForm } from '../../lib/submitForm'
+import { PrivacyNote } from '../PrivacyNote/PrivacyNote'
 import styles from './JoinCta.module.css'
 
 /** Closing call to action with the waitlist sign-up form. */
@@ -60,9 +61,7 @@ export function JoinCta() {
               <Button type="submit" variant="accent" magnetic className={styles.submit}>
                 {cta.joinWaitlist}
               </Button>
-              <p className={styles.note}>
-                {waitlist.privacyNote} <a href={legalLinks.privacy.href}>{legalLinks.privacy.label}</a>.
-              </p>
+              <PrivacyNote tone="onBrand" />
             </form>
           </>
         )}

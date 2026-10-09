@@ -11,6 +11,7 @@
   --color-brand-muted: #2a64c9;
   --color-accent: #ffb201;
   --color-accent-hover: #ffc53d;
+  --color-accent-soft: rgba(255, 178, 1, 0.12);
   --color-danger: #d93a3f;
 
   /* Neutrals */

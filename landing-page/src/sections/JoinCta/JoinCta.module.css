@@ -52,18 +52,6 @@
   padding: 0 40px;
 }
 
-.note {
-  margin: 8px 0 0;
-  text-align: center;
-  font-size: 14px;
-  color: var(--color-on-brand-muted);
-}
-
-.note a {
-  color: var(--color-white);
-  text-decoration: underline;
-}
-
 .success {
   margin-top: 22px;
   display: flex;

@@ -1,10 +1,10 @@
 export const howItWorks = {
-  eyebrow: 'How it works',
+  eyebrow: 'How it will work',
   title: 'Three simple steps.',
   steps: [
-    { title: 'Explore', body: 'Browse companions by interests, availability and price.' },
-    { title: 'Book', body: 'Choose a time, video or audio, pay securely.' },
-    { title: 'Connect', body: 'Talk through LinkCircle, then leave feedback or book again.' },
+    { title: 'Explore', body: "You'll browse companions by interests, availability and price." },
+    { title: 'Book', body: "You'll choose a time and a video or audio call, then pay securely." },
+    { title: 'Connect', body: "You'll talk through LinkCircle, then leave feedback or book again." },
   ],
 }
 

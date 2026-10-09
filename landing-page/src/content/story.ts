@@ -15,10 +15,10 @@ export const founder = {
 
 export const companionPitch = {
   title: "Your time, personality or talent could brighten someone's day.",
-  body: "Set your own availability and prices, and offer conversation, shared interests or a skill to people who would value your company. Register now and we'll be in touch before launch.",
+  body: "When we launch, you'll set your own availability and prices, and offer conversation, shared interests or a skill to people who would value your company. Register now and we'll be in touch before launch.",
 }
 
 export const carePitch = {
   title: 'Meaningful connection for residents, made easier to manage.',
-  body: 'Residents choose who they talk to and when. Your team books and manages every conversation from one simple account, with straightforward administration and billing.',
+  body: 'Residents will choose who they talk to and when. Your team will be able to book and manage every conversation from one simple account, with straightforward administration and billing.',
 }

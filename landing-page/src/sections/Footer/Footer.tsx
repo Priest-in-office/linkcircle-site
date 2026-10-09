@@ -1,6 +1,6 @@
 import { Icon } from '../../components/Icon/Icon'
 import { Logo } from '../../components/Logo/Logo'
-import { brand, legalLinks, socialLinks } from '../../content/site'
+import { brand, isLive, legalLinks, socialLinks } from '../../content/site'
 import styles from './Footer.module.css'
 
 export function Footer() {
@@ -13,9 +13,16 @@ export function Footer() {
             <p className={styles.tagline}>{brand.tagline}</p>
           </div>
           <div className={styles.socials}>
-            {socialLinks.map((s) => (
-              <a key={s.label} href={s.href} aria-label={s.label} className={styles.social}>
-                {'icon' in s ? <Icon name={s.icon} size={20} /> : s.text}
+            {socialLinks.filter(isLive).map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={`${brand.name} on ${s.label}`}
+                className={styles.social}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {'icon' in s ? <Icon name={s.icon} size={s.icon === 'tiktok' ? 17 : 20} /> : s.text}
               </a>
             ))}
           </div>
@@ -23,7 +30,7 @@ export function Footer() {
 
         <div className={styles.bottom}>
           <div className={styles.legal}>
-            {Object.values(legalLinks).map((link) => (
+            {Object.values(legalLinks).filter(isLive).map((link) => (
               <a key={link.label} href={link.href}>
                 {link.label}
               </a>

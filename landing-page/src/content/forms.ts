@@ -1,5 +1,8 @@
 import { cta } from './site'
 
+/** Shown under every form that collects personal data, followed by a link to the privacy policy. */
+export const privacyNote = "We'll only use your details as described in our"
+
 export const waitlist = {
   title: 'Find your circle.',
   lede: 'Join the waitlist and be first to know when LinkCircle opens.',
@@ -8,7 +11,6 @@ export const waitlist = {
     firstName: { label: 'First name (optional)', placeholder: 'First name' },
   },
   consent: "I'd like to receive updates and marketing emails from LinkCircle. You can unsubscribe at any time.",
-  privacyNote: "We'll only use your details as described in our",
   success: (name?: string) => (name ? `You're on the list, ${name}.` : "You're on the list."),
   successNote: "We'll email you as soon as LinkCircle is ready.",
 }

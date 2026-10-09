@@ -1,0 +1,21 @@
+.note {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.note a {
+  text-decoration: underline;
+}
+
+.default {
+  color: var(--color-ink-muted);
+}
+
+.onBrand {
+  color: var(--color-on-brand-muted);
+}
+
+.onBrand a {
+  color: var(--color-white);
+}
