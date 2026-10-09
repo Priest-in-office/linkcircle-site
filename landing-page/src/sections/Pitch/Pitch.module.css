@@ -1,0 +1,58 @@
+/* Companion: circular photo inside the split ring */
+.circleStage {
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.circleRings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.accentDot {
+  position: absolute;
+  right: 9%;
+  bottom: 9%;
+  width: 14%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* Care: copy first on wide screens, photo first when stacked */
+.careLayout {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: clamp(56px, 7vw, 112px);
+  align-items: center;
+}
+
+.careCopy {
+  flex: 1 1 440px;
+  min-width: 0;
+}
+
+.careVisual {
+  flex: 1 1 440px;
+  display: flex;
+  justify-content: center;
+}
+
+.portraitStage {
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 4 / 5;
+}
+
+.cornerRing {
+  position: absolute;
+  left: -14%;
+  bottom: -10%;
+  width: 42%;
+  height: auto;
+  pointer-events: none;
+}

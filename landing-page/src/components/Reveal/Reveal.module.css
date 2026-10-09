@@ -1,0 +1,47 @@
+/* Fade-and-rise on entering the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--duration-reveal) var(--ease-out) var(--reveal-delay, 0ms),
+    background var(--duration-fast),
+    border-color var(--duration-fast),
+    box-shadow var(--duration-base);
+}
+
+.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Once revealed, drop the delay so hover transitions respond instantly. */
+.settled {
+  --reveal-delay: 0ms;
+}
+
+/* Masked line that slides up into view (large headings). */
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.line {
+  display: block;
+  transform: translateY(110%);
+  transition: transform var(--duration-line) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.lineVisible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .line {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

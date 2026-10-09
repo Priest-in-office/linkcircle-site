@@ -1,0 +1,73 @@
+/*
+ * Design tokens — the single source of truth for every colour, font, radius,
+ * shadow, easing and layout measure on the site. Change a value here and it
+ * applies everywhere. Components must reference these variables, never raw values.
+ */
+:root {
+  /* Brand */
+  --color-brand: #0057c1;
+  --color-brand-hover: #00449a;
+  --color-brand-soft: #3b7be0;
+  --color-brand-muted: #2a64c9;
+  --color-accent: #ffb201;
+  --color-accent-hover: #ffc53d;
+  --color-danger: #d93a3f;
+
+  /* Neutrals */
+  --color-ink: #0b1b33;
+  --color-ink-muted: #46546b;
+  --color-ink-subtle: #c9d2e0;
+  --color-on-dark-muted: #afc0da;
+  --color-on-brand-muted: #e3ecfa;
+  --color-white: #ffffff;
+  --color-surface: #f7f8fa;
+  --color-surface-sunken: #e9edf3;
+  --color-surface-control: #f1f3f7;
+  --color-field-border: #ccd3de;
+
+  /* Hairlines (ink at low opacity) */
+  --line-faint: rgba(11, 27, 51, 0.05);
+  --line-soft: rgba(11, 27, 51, 0.06);
+  --line: rgba(11, 27, 51, 0.08);
+  --line-strong: rgba(11, 27, 51, 0.14);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-icons: 'Material Symbols Outlined';
+  --tracking-tight: -0.04em;
+  --tracking-snug: -0.02em;
+  --tracking-eyebrow: 0.08em;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-field: 16px;
+  --radius-badge: 14px;
+  --radius-card: 28px;
+  --radius-media: 36px;
+  --radius-phone: 46px;
+  --radius-phone-screen: 38px;
+
+  /* Shadows */
+  --shadow-brand: 0 14px 34px -14px rgba(0, 87, 193, 0.7);
+  --shadow-card-hover: 0 30px 60px -30px rgba(11, 27, 51, 0.25);
+  --shadow-phone: 0 50px 90px -30px rgba(11, 27, 51, 0.45), 0 20px 40px -20px rgba(11, 27, 51, 0.3);
+  --shadow-dialog: 0 40px 100px -30px rgba(11, 27, 51, 0.5);
+  --focus-ring-brand: 0 0 0 4px rgba(0, 87, 193, 0.15);
+  --focus-ring-accent: 0 0 0 4px rgba(255, 178, 1, 0.45);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 300ms;
+  --duration-base: 500ms;
+  --duration-reveal: 800ms;
+  --duration-line: 1000ms;
+  --duration-arc: 1800ms;
+
+  /* Layout */
+  --container-width: 1240px;
+  --gutter: 24px;
+  --header-height: 72px;
+  --section-pad: clamp(104px, 13vw, 176px);
+  --control-height: 58px;
+}

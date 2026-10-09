@@ -1,0 +1,75 @@
+.section {
+  position: relative;
+  /* Sections override vertical padding by setting --pad-top / --pad-bottom. */
+  padding: var(--pad-top, var(--section-pad)) var(--gutter) var(--pad-bottom, var(--section-pad));
+  overflow: hidden;
+}
+
+.surface {
+  background: var(--color-surface);
+}
+.white {
+  background: var(--color-white);
+}
+.ink {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+.brand {
+  background: var(--color-brand);
+  color: var(--color-white);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+/* Two-column media + copy layout used by several sections. */
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--split-min, 440px)), 1fr));
+  gap: clamp(56px, 7vw, 112px);
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.title {
+  margin: 18px 0 0;
+  font-size: clamp(36px, 4.6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.titleXl {
+  font-size: clamp(38px, 5.2vw, 68px);
+  line-height: 1.02;
+}
+
+.body {
+  margin: 24px 0 0;
+  max-width: 520px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  text-wrap: pretty;
+}
+
+.accentRule {
+  display: inline-block;
+  flex: none;
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}

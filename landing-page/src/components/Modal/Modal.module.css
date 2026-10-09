@@ -1,0 +1,43 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  background: rgba(11, 27, 51, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: clamp(28px, 5vw, 44px);
+  box-shadow: var(--shadow-dialog);
+}
+
+.dialog:focus {
+  outline: none;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--color-surface-control);
+  color: var(--color-ink);
+  font-size: 22px;
+  cursor: pointer;
+}

@@ -1,0 +1,145 @@
+.hero {
+  min-height: 100vh;
+  --pad-top: clamp(112px, 14vw, 160px);
+  --pad-bottom: clamp(72px, 8vw, 120px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
+  gap: clamp(56px, 6vw, 96px);
+  align-items: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-white);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.title {
+  margin: 28px 0 0;
+  font-size: clamp(46px, 7.4vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+.titleAccent {
+  color: var(--color-brand);
+}
+
+.lede {
+  margin: 24px 0 0;
+  max-width: 520px;
+  font-size: clamp(18px, 1.5vw, 20px);
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  text-wrap: pretty;
+}
+
+.actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.careLink {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--color-accent);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stores {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.store {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  min-width: 168px;
+  padding: 0 20px 0 16px;
+  border-radius: var(--radius-badge);
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.storeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.storeStatus {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle);
+}
+
+.storeName {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Visual */
+.visual {
+  display: flex;
+  justify-content: center;
+}
+
+.stage {
+  position: relative;
+  width: min(580px, 100%);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.phone {
+  position: relative;
+  z-index: 1;
+  height: 96%;
+  aspect-ratio: 9 / 19;
+}

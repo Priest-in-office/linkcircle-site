@@ -1,0 +1,178 @@
+/* Tall section; the inner panel sticks while scroll progress advances the steps. */
+.how {
+  position: relative;
+  height: 320vh;
+  background: var(--color-white);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 76px var(--gutter) var(--gutter);
+}
+
+.grid {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(24px, 6vw, 96px);
+  align-items: center;
+}
+
+.track {
+  margin-top: clamp(18px, 3vw, 28px);
+  height: 2px;
+  max-width: 420px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 100%;
+  background: var(--color-accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* Full step list (large screens) */
+.steps {
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.step {
+  display: flex;
+  gap: 24px;
+  opacity: 0.32;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.stepActive {
+  opacity: 1;
+}
+
+.number {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  background: var(--color-white);
+  color: var(--color-brand);
+  border: 1.5px solid var(--color-brand);
+  transition:
+    background var(--duration-base),
+    color var(--duration-base);
+}
+
+.stepActive .number {
+  background: var(--color-brand);
+  color: var(--color-white);
+}
+
+.stepTitle {
+  margin: 8px 0 0;
+  font-size: 28px;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.stepBody {
+  margin: 8px 0 0;
+  max-width: 440px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+/* Single current step (small or short screens) */
+.compact {
+  display: none;
+  margin-top: 20px;
+  gap: 16px;
+  align-items: flex-start;
+  min-height: 84px;
+}
+
+.compact .number {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  border: 0;
+  background: var(--color-brand);
+  color: var(--color-white);
+}
+
+.compact .stepTitle {
+  margin-top: 4px;
+  font-size: 22px;
+  letter-spacing: var(--tracking-snug);
+}
+
+.compact .stepBody {
+  margin-top: 6px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.phoneWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.phone {
+  height: min(640px, 74vh);
+}
+
+.screenLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(4%) scale(0.98);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+.screenPast {
+  transform: translateY(-4%) scale(0.98);
+}
+
+.screenCurrent {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 1023px), (max-height: 719px) {
+  .steps {
+    display: none;
+  }
+  .compact {
+    display: flex;
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    gap: clamp(16px, 3vh, 32px);
+  }
+  .phone {
+    height: max(220px, min(500px, calc(100vh - 340px)));
+  }
+}

@@ -1,0 +1,86 @@
+.join {
+  --pad-top: clamp(112px, 14vw, 192px);
+  --pad-bottom: clamp(112px, 14vw, 192px);
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  margin: 40px 0 0;
+  font-size: clamp(56px, 9vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-weight: 700;
+}
+
+.lede {
+  margin: 22px 0 0;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--color-on-brand-muted);
+}
+
+.form {
+  margin-top: 44px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+.consent {
+  margin-top: 8px;
+}
+
+.submit {
+  margin-top: 16px;
+  align-self: center;
+  padding: 0 40px;
+}
+
+.note {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-on-brand-muted);
+}
+
+.note a {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.success {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.successTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.successNote {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-on-brand-muted);
+}

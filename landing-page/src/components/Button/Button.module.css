@@ -1,0 +1,76 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast),
+    border-color var(--duration-fast),
+    transform var(--duration-base) var(--ease-out);
+}
+
+/* Variants */
+.primary,
+.primary:hover {
+  color: var(--color-white);
+}
+.primary {
+  background: var(--color-brand);
+}
+.primary:hover {
+  background: var(--color-brand-hover);
+}
+
+.secondary,
+.secondary:hover {
+  color: var(--color-ink);
+}
+.secondary {
+  background: var(--color-white);
+  border-color: var(--line-strong);
+}
+.secondary:hover {
+  border-color: var(--color-brand);
+}
+
+.accent,
+.accent:hover {
+  color: var(--color-ink);
+}
+.accent {
+  background: var(--color-accent);
+  font-weight: 700;
+}
+.accent:hover {
+  background: var(--color-accent-hover);
+}
+
+/* Sizes */
+.sm {
+  height: 44px;
+  padding: 0 22px;
+  font-size: 15px;
+}
+.md {
+  height: 52px;
+  padding: 0 28px;
+  font-size: 16px;
+}
+.lg {
+  height: var(--control-height);
+  padding: 0 30px;
+  font-size: 17px;
+}
+
+.elevated {
+  box-shadow: var(--shadow-brand);
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
