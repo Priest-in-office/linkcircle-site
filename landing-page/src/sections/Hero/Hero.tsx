@@ -7,6 +7,7 @@ import { Section } from '../../components/Section/Section'
 import { hero } from '../../content/hero'
 import { cta, href, sectionIds, storeBadges } from '../../content/site'
 import { CallScreen } from './CallScreen'
+import { HeroOrbit } from './HeroOrbit'
 import styles from './Hero.module.css'
 
 export function Hero() {
@@ -68,6 +69,7 @@ export function Hero() {
               stagger={250}
               className={styles.rings}
             />
+            <HeroOrbit />
             <Reveal delay={500} className={styles.phone}>
               <Phone style={{ height: '100%' }}>
                 <CallScreen mode={hero.callMode} {...hero.call} />
