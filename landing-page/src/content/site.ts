@@ -15,6 +15,7 @@ export const sectionIds = {
   founder: 'founder',
   companion: 'companion',
   care: 'care',
+  about: 'about',
   join: 'join',
 } as const
 
@@ -43,6 +44,7 @@ export const navLinks = [
   { label: 'How it works', href: href(sectionIds.how) },
   { label: cta.becomeCompanion, href: href(sectionIds.companion) },
   { label: cta.forCareOrgs, href: href(sectionIds.care) },
+  { label: 'Our Mission', href: href(sectionIds.about) },
 ] as const
 
 export const storeBadges = [

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { InterestFormKind } from '../content/forms'
 import { sectionIds } from '../content/site'
+import { About } from '../sections/About/About'
 import { Clarity } from '../sections/Clarity/Clarity'
 import { Features } from '../sections/Features/Features'
 import { Footer } from '../sections/Footer/Footer'
@@ -30,6 +31,7 @@ export function HomePage() {
         <Founder />
         <CompanionPitch onRegister={() => setOpenForm('companion')} />
         <CarePitch onRequest={() => setOpenForm('care')} />
+        <About />
         <JoinCta />
       </main>
       <Footer />
