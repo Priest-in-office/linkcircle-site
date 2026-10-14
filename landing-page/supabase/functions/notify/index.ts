@@ -11,7 +11,9 @@
 // Secrets (Supabase dashboard → Edge Functions → Secrets):
 //   RESEND_API_KEY   Resend API key from LinkCircle's Resend account
 //   NOTIFY_TO        Emmanuel's official inbox, e.g. hello@linkcircle.co.uk (also the reply-to on confirmations)
-//   NOTIFY_FROM      Verified sender address, e.g. notifications@linkcircle.co.uk (any display name is replaced)
+//   NOTIFY_FROM      Verified sender address for team emails, e.g. notifications@linkcircle.co.uk (any display name is replaced)
+//   PUBLIC_FROM      Optional sender address for confirmations, e.g. welcome@linkcircle.co.uk (its domain must be
+//                    verified in Resend). Until it is set, confirmations use the NOTIFY_FROM address.
 //   WEBHOOK_SECRET   Same random string stored in the vault as webhook_secret
 // SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are provided automatically.
 
@@ -53,12 +55,11 @@ const escape = (value: unknown) =>
 const londonTime = (iso: unknown) =>
   new Date(String(iso)).toLocaleString('en-GB', { timeZone: 'Europe/London', dateStyle: 'medium', timeStyle: 'short' })
 
-/** NOTIFY_FROM may be "Name <address>" or a bare address; only the address is kept. */
-const sender = (name: string) => {
-  const from = env('NOTIFY_FROM')
-  const address = from.match(/<([^>]+)>/)?.[1] ?? from
-  return `${name} <${address.trim()}>`
-}
+/** Secrets may hold "Name <address>" or a bare address; only the address is kept. */
+const addressOf = (from: string) => (from.match(/<([^>]+)>/)?.[1] ?? from).trim()
+
+const teamSender = () => `${TEAM_SENDER} <${addressOf(env('NOTIFY_FROM'))}>`
+const publicSender = () => `${PUBLIC_SENDER} <${addressOf(Deno.env.get('PUBLIC_FROM') || env('NOTIFY_FROM'))}>`
 
 type Email = {
   subject: string
@@ -67,16 +68,16 @@ type Email = {
   replyTo?: string
   /** Defaults to the team inbox. */
   to?: string
-  /** Defaults to TEAM_SENDER. */
-  fromName?: string
+  /** "Name <address>". Defaults to the team sender. */
+  from?: string
 }
 
-async function sendEmail({ subject, html, text, replyTo, to = env('NOTIFY_TO'), fromName = TEAM_SENDER }: Email) {
+async function sendEmail({ subject, html, text, replyTo, to = env('NOTIFY_TO'), from = teamSender() }: Email) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env('RESEND_API_KEY')}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: sender(fromName),
+      from,
       to: [to],
       subject,
       html,
@@ -115,7 +116,7 @@ const NOT_YOU = "If you didn't send this, you can ignore this email, or reply an
 async function sendConfirmation(to: string, subject: string, heading: string, paragraphs: string[]) {
   await sendEmail({
     to,
-    fromName: PUBLIC_SENDER,
+    from: publicSender(),
     replyTo: env('NOTIFY_TO'),
     subject,
     html: layout(
