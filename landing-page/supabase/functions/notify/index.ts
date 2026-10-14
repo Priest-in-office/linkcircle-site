@@ -2,8 +2,8 @@
 // Called only by the database (triggers and the weekly cron job), never by the website.
 //
 // Payloads:
-//   { type: 'care_enquiries',     record }  → instant email to the team for a care organisation enquiry
-//   { type: 'companion_interest', record }  → instant email to the team for a companion registration
+//   { type: 'care_enquiries',     record }  → instant email to the team, plus a confirmation to the enquirer
+//   { type: 'companion_interest', record }  → instant email to the team, plus a confirmation to the companion
 //   { type: 'waitlist',           record }  → confirmation email to the person who just joined the waitlist
 //   { type: 'waitlist_batch' }              → email the team every unreported sign-up, if there are 10 or more
 //   { type: 'waitlist_weekly' }             → email the team every unreported sign-up, if there are any
@@ -101,8 +101,34 @@ const detailsTable = (rows: [string, unknown][]) =>
     )
     .join('')}</table>`
 
-async function notifyCare(r: Row) {
+/** Sends every email even if one fails, then reports the first failure. */
+async function sendAll(...emails: Promise<void>[]) {
+  const failed = (await Promise.allSettled(emails)).find((r): r is PromiseRejectedResult => r.status === 'rejected')
+  if (failed) throw failed.reason
+}
+
+const firstName = (name: unknown) => String(name ?? '').trim().split(/\s+/)[0]
+
+const NOT_YOU = "If you didn't send this, you can ignore this email, or reply and we'll remove your details."
+
+/** Confirmation to the person who filled in a form, from PUBLIC_SENDER. Replies go to the team inbox. */
+async function sendConfirmation(to: string, subject: string, heading: string, paragraphs: string[]) {
   await sendEmail({
+    to,
+    fromName: PUBLIC_SENDER,
+    replyTo: env('NOTIFY_TO'),
+    subject,
+    html: layout(
+      escape(heading),
+      paragraphs.map((p) => `<p style="line-height:1.6">${escape(p)}</p>`).join('') +
+        `<p style="line-height:1.6;margin-top:24px">${PUBLIC_SENDER}</p>`,
+    ),
+    text: [heading, ...paragraphs, PUBLIC_SENDER].join('\n\n'),
+  })
+}
+
+async function notifyCare(r: Row) {
+  const toTeam = sendEmail({
     subject: `New care organisation enquiry: ${r.organisation}`,
     html: layout(
       'New care organisation enquiry',
@@ -118,10 +144,16 @@ async function notifyCare(r: Row) {
     ),
     replyTo: String(r.email),
   })
+  const toSender = sendConfirmation(String(r.email), "We've received your request", `Thank you, ${firstName(r.contact_name)}.`, [
+    `Thanks for getting in touch on behalf of ${r.organisation}. We've received your request and will be in touch to arrange a conversation.`,
+    "If there's anything you'd like to add in the meantime, just reply to this email.",
+    NOT_YOU,
+  ])
+  await sendAll(toTeam, toSender)
 }
 
 async function notifyCompanion(r: Row) {
-  await sendEmail({
+  const toTeam = sendEmail({
     subject: `New companion registration: ${r.name}`,
     html: layout(
       'New companion registration',
@@ -135,32 +167,32 @@ async function notifyCompanion(r: Row) {
     ),
     replyTo: String(r.email),
   })
+  const toSender = sendConfirmation(
+    String(r.email),
+    'Thanks for your interest in becoming a LinkCircle companion',
+    `Thank you, ${firstName(r.name)}.`,
+    [
+      "Thanks for registering your interest in becoming a LinkCircle companion. We've received your details and will be in touch as we get closer to launch.",
+      NOT_YOU,
+    ],
+  )
+  await sendAll(toTeam, toSender)
 }
 
-/** Confirmation to the person who just joined. Replies go to the team inbox. */
+/** Confirmation to the person who just joined the waitlist. */
 async function confirmWaitlist(r: WaitlistRow) {
-  const heading = r.first_name ? `You're on the list, ${r.first_name}.` : "You're on the list."
-  const paragraphs = [
-    "Thanks for joining the LinkCircle waitlist. We'll email you as soon as LinkCircle is ready.",
-    ...(r.marketing_consent
-      ? ["You also asked to hear our updates along the way, so we'll keep you posted. If you change your mind, just reply to this email."]
-      : []),
-    "If you didn't sign up, you can ignore this email, or reply and we'll remove your details.",
-  ]
-  const signOff = 'The LinkCircle Team'
-
-  await sendEmail({
-    to: r.email,
-    fromName: PUBLIC_SENDER,
-    replyTo: env('NOTIFY_TO'),
-    subject: "You're on the LinkCircle waitlist",
-    html: layout(
-      escape(heading),
-      paragraphs.map((p) => `<p style="line-height:1.6">${escape(p)}</p>`).join('') +
-        `<p style="line-height:1.6;margin-top:24px">${signOff}</p>`,
-    ),
-    text: [heading, ...paragraphs, signOff].join('\n\n'),
-  })
+  await sendConfirmation(
+    r.email,
+    "You're on the LinkCircle waitlist",
+    r.first_name ? `You're on the list, ${r.first_name}.` : "You're on the list.",
+    [
+      "Thanks for joining the LinkCircle waitlist. We'll email you as soon as LinkCircle is ready.",
+      ...(r.marketing_consent
+        ? ["You also asked to hear our updates along the way, so we'll keep you posted. If you change your mind, just reply to this email."]
+        : []),
+      "If you didn't sign up, you can ignore this email, or reply and we'll remove your details.",
+    ],
+  )
 }
 
 async function notifyWaitlist(minimum: number, label: string) {
