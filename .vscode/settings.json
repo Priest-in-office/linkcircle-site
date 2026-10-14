@@ -1,0 +1,4 @@
+{
+  // Supabase Edge Functions run on Deno, not Node. Needs the Deno extension and Deno CLI.
+  "deno.enablePaths": ["landing-page/supabase/functions"]
+}

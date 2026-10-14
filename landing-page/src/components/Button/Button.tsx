@@ -16,6 +16,7 @@ type ButtonProps = {
   block?: boolean
   className?: string
   onClick?: () => void
+  disabled?: boolean
 } & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
 
 export function Button({
@@ -29,6 +30,7 @@ export function Button({
   className,
   type = 'button',
   onClick,
+  disabled,
 }: ButtonProps) {
   const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null)
   useMagnetic(ref, magnetic)
@@ -51,7 +53,7 @@ export function Button({
   }
 
   return (
-    <button ref={ref} type={type} className={classes} onClick={onClick}>
+    <button ref={ref} type={type} className={classes} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   )

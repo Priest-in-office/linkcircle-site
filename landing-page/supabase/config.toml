@@ -1,0 +1,3 @@
+# The notify function is called by the database with a shared secret header, not a user JWT.
+[functions.notify]
+verify_jwt = false

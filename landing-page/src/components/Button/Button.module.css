@@ -74,3 +74,8 @@
   display: flex;
   width: 100%;
 }
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}

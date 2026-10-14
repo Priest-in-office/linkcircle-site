@@ -1,0 +1,26 @@
+# Keeps LinkCircle's free-plan Supabase project from pausing after a quiet week.
+# Needs two repository secrets (Settings → Secrets and variables → Actions):
+#   SUPABASE_URL       https://<project-ref>.supabase.co
+#   SUPABASE_ANON_KEY  the same public key the website uses
+# Delete this workflow if LinkCircle moves to Supabase Pro.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: '0 6 */3 * *'   # every 3 days, 06:00 UTC
+  workflow_dispatch:         # lets you run it by hand from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the database
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          auth=()
+          if [[ "$SUPABASE_ANON_KEY" == eyJ* ]]; then auth=(-H "Authorization: Bearer $SUPABASE_ANON_KEY"); fi
+          curl --fail-with-body -sS -X POST "$SUPABASE_URL/rest/v1/rpc/ping" \
+            -H "apikey: $SUPABASE_ANON_KEY" "${auth[@]}" \
+            -H "Content-Type: application/json" -d '{}'

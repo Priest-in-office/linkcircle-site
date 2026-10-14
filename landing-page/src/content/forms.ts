@@ -71,3 +71,7 @@ export const interestForms: Record<InterestFormKind, InterestFormConfig> = {
 }
 
 export const formSuccessTitle = 'Thank you.'
+
+/** Shown when a form can't be sent (network error, backend down). */
+export const formError = "Sorry, we couldn't send that. Please check your connection and try again."
+export const formSending = 'Sending…'

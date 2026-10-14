@@ -72,3 +72,15 @@
   line-height: 1.6;
   color: var(--color-on-brand-muted);
 }
+
+/* White panel so the message stays readable on the blue background. */
+.error {
+  margin: 8px 0 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-notice);
+  background: var(--color-white);
+  color: var(--color-danger);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}

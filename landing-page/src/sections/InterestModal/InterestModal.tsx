@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react'
 import { Button } from '../../components/Button/Button'
 import { Field } from '../../components/Field/Field'
+import { Honeypot } from '../../components/Honeypot/Honeypot'
 import { Modal } from '../../components/Modal/Modal'
 import { SuccessMark } from '../../components/SuccessMark/SuccessMark'
-import { formSuccessTitle, interestForms, type InterestFormKind } from '../../content/forms'
+import { formError, formSending, formSuccessTitle, interestForms, type InterestFormKind } from '../../content/forms'
 import { submitForm } from '../../lib/submitForm'
 import { PrivacyNote } from '../PrivacyNote/PrivacyNote'
 import styles from './InterestModal.module.css'
@@ -14,11 +15,24 @@ const TITLE_ID = 'interest-modal-title'
 export function InterestModal({ kind, onClose }: { kind: InterestFormKind; onClose: () => void }) {
   const form = interestForms[kind]
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await submitForm(kind, new FormData(e.currentTarget))
-    setSent(true)
+    if (sending) return
+    const data = new FormData(e.currentTarget)
+    setSending(true)
+    setFailed(false)
+    try {
+      await submitForm(kind, data)
+      setSent(true)
+    } catch (err) {
+      console.error(err)
+      setFailed(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -40,12 +54,18 @@ export function InterestModal({ kind, onClose }: { kind: InterestFormKind; onClo
           <h3 id={TITLE_ID} className={styles.title}>
             {form.title}
           </h3>
-          <form className={styles.form} onSubmit={onSubmit}>
+          <form className={styles.form} onSubmit={onSubmit} aria-busy={sending}>
+            <Honeypot />
             {form.fields.map((field) => (
               <Field key={field.name} {...field} />
             ))}
-            <Button type="submit" block className={styles.submit}>
-              {form.submitLabel}
+            {failed && (
+              <p role="alert" className={styles.error}>
+                {formError}
+              </p>
+            )}
+            <Button type="submit" block className={styles.submit} disabled={sending}>
+              {sending ? formSending : form.submitLabel}
             </Button>
             <PrivacyNote />
           </form>

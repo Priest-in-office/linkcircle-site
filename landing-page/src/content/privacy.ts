@@ -40,7 +40,7 @@ export const privacy = {
       heading: 'How we use it, and our lawful basis',
       blocks: [
         [
-          'To tell you when LinkCircle launches, because you asked us to by joining the waitlist (legitimate interests).',
+          'To send you one email confirming you have joined the waitlist, and to tell you when LinkCircle launches, because you asked us to by joining (legitimate interests).',
           'To send you updates and marketing emails, only if you ticked the box to agree (consent). You can withdraw consent at any time using the unsubscribe link in any email or by contacting us.',
           'To respond to companion and care organisation enquiries and arrange a conversation (legitimate interests, or steps taken at your request before entering into a contract).',
         ],
@@ -52,8 +52,9 @@ export const privacy = {
       blocks: [
         'We use a small number of service providers who process information on our behalf and only on our instructions:',
         [
-          'Website hosting: [[hosting provider]].',
-          'Form handling and email: [[form / email provider]].',
+          'Website hosting: Cloudflare (Cloudflare Pages).',
+          'Form storage: Supabase, which stores what you send through our forms in London, UK.',
+          'Email: Resend, which sends your waitlist confirmation email and delivers a copy of each form submission to our team inbox.',
           'Fonts: pages load typefaces from Google Fonts, which means your browser sends your IP address to Google when the page loads.',
         ],
         'Where a provider stores data outside the UK, we make sure appropriate safeguards are in place, such as the UK International Data Transfer Agreement or an adequacy decision.',
