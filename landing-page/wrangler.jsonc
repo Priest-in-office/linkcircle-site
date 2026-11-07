@@ -11,5 +11,8 @@
     "not_found_handling": "404-page",
     // /privacy redirects to /privacy/ (matches trailingSlash: true).
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  // Required by `npx wrangler preview`, the deploy command for non-production branch builds.
+  // Empty: previews inherit the assets and compatibility settings above.
+  "previews": {}
 }
