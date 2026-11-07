@@ -11,8 +11,6 @@ import { HeroOrbit } from './HeroOrbit'
 import styles from './Hero.module.css'
 
 export function Hero() {
-  const [firstLine, secondLine] = hero.titleLines
-
   return (
     <Section tone="surface" className={styles.hero}>
       <div className={styles.grid}>
@@ -23,10 +21,11 @@ export function Hero() {
           </Reveal>
 
           <h1 className={styles.title}>
-            <RevealLine delay={120}>{firstLine}</RevealLine>
-            <RevealLine delay={260} className={styles.titleAccent}>
-              {secondLine}
-            </RevealLine>
+            {hero.titleLines.map((line, i) => (
+              <RevealLine key={line} delay={120 + i * 140} className={i > 0 ? styles.titleAccent : undefined}>
+                {line}
+              </RevealLine>
+            ))}
           </h1>
 
           <Reveal as="p" delay={420} className={styles.lede}>

@@ -1,8 +1,8 @@
 /** Copy for the narrative sections: clarity statement, founder, companion and care pitches. */
 
 export const clarity = {
-  statement: 'LinkCircle is for conversation and companionship.',
-  disclaimer: 'It is not a dating, therapy, medical or emergency service.',
+  statement: 'Every Great Connection Begins with a Conversation.',
+  body: 'At LinkCircle, we believe meaningful connections start with genuine conversations. Choose who you talk to, enjoy dedicated time together, and let every conversation be its own experience.',
 }
 
 export const founder = {

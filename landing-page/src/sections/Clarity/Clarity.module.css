@@ -29,6 +29,11 @@
   text-wrap: balance;
 }
 
-.muted {
+.body {
+  max-width: 720px;
+  margin: 28px auto 0;
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.55;
   color: var(--color-on-dark-muted);
+  text-wrap: pretty;
 }

@@ -18,8 +18,11 @@ export function Clarity() {
         <Reveal>
           <AccentRule />
         </Reveal>
-        <Reveal as="p" delay={120} className={styles.statement}>
-          {clarity.statement} <span className={styles.muted}>{clarity.disclaimer}</span>
+        <Reveal as="h2" delay={120} className={styles.statement}>
+          {clarity.statement}
+        </Reveal>
+        <Reveal as="p" delay={240} className={styles.body}>
+          {clarity.body}
         </Reveal>
       </div>
     </Section>
