@@ -19,7 +19,7 @@ export const sectionIds = {
   join: 'join',
 } as const
 
-/** Page paths. Keep in sync with the HTML entries in vite.config.ts. */
+/** Page paths. Each needs a route in src/app and an entry in `pageMeta` (content/seo.ts). */
 export const pages = {
   home: '/',
   privacy: '/privacy/',

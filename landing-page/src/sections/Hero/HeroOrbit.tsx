@@ -23,9 +23,16 @@ const MOBILE_COUNT = 2
 const FIRST_DELAY_MS = 900
 const STAGGER_MS = 160
 
+/**
+ * Rounded to 2 decimals: browsers store inline styles at lower precision than JS
+ * prints them, so unrounded values differ between the server HTML and the client
+ * render and cause a hydration mismatch.
+ */
+const pct = (n: number) => `${n.toFixed(2)}%`
+
 const position = (angle: number) => {
   const rad = (angle * Math.PI) / 180
-  return { left: `${50 + RING_RADIUS * Math.sin(rad)}%`, top: `${50 - RING_RADIUS * Math.cos(rad)}%` }
+  return { left: pct(50 + RING_RADIUS * Math.sin(rad)), top: pct(50 - RING_RADIUS * Math.cos(rad)) }
 }
 
 /** Faces placed on the brand rings around the hero phone. */

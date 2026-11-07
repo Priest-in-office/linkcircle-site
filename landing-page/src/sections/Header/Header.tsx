@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useState } from 'react'
 import { Button } from '../../components/Button/Button'
 import { Logo } from '../../components/Logo/Logo'

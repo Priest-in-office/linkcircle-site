@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { useMagnetic } from '../../hooks/useMagnetic'
 import { cx } from '../../lib/cx'

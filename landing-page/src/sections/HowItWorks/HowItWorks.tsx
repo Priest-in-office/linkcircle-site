@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState } from 'react'
 import { Phone } from '../../components/Phone/Phone'
 import { SectionTitle, StaticEyebrow } from '../../components/Section/Section'

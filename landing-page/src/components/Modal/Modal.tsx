@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, type ReactNode } from 'react'
 import { useEscapeKey } from '../../hooks/useEscapeKey'
 import styles from './Modal.module.css'

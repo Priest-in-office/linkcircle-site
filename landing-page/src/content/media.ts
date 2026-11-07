@@ -2,6 +2,7 @@
  * Every image on the site, keyed by the role it plays. Swap a photo here and it
  * updates everywhere that role is used. Leave `src` undefined to show a placeholder.
  */
+import type { StaticImageData } from 'next/image'
 import emblem from '../assets/images/emblem.png'
 import wordmark from '../assets/images/wordmark.png'
 import founder from '../assets/images/founder.jpg'
@@ -12,7 +13,8 @@ import image2 from '../assets/images/image2.jpeg'
 import image3 from '../assets/images/image3.jpeg'
 import image4 from '../assets/images/image4.jpeg'
 
-export type Media = { src?: string; alt: string }
+/** `src` is a static image import, so Next.js knows its intrinsic size. */
+export type Media = { src?: StaticImageData; alt: string }
 
 export const logo = { emblem, wordmark }
 

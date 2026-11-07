@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState, type CSSProperties, type ElementType, type HTMLAttributes, type ReactNode } from 'react'
 import { useInView } from '../../hooks/useInView'
 import { cx } from '../../lib/cx'

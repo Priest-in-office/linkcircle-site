@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { brand } from '../../content/site'
 import { logo } from '../../content/media'
 
@@ -11,8 +12,9 @@ export function Logo({ size = 'sm' }: { size?: keyof typeof sizes }) {
   const s = sizes[size]
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: s.gap }}>
-      <img src={logo.emblem} alt="" width={s.emblem} height={s.emblem} />
-      <img src={logo.wordmark} alt={brand.name} style={{ height: s.wordmark, width: 'auto' }} />
+      {/* In the header on every page, so load it straight away rather than lazily. */}
+      <Image src={logo.emblem} alt="" width={s.emblem} height={s.emblem} preload />
+      <Image src={logo.wordmark} alt={brand.name} style={{ height: s.wordmark, width: 'auto' }} preload />
     </span>
   )
 }

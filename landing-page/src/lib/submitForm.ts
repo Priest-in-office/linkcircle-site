@@ -2,9 +2,10 @@
  * Single integration point for every form on the site (waitlist, companion, care).
  * Sends submissions to LinkCircle's Supabase project through its REST API.
  *
- * Needs two environment variables (Cloudflare Pages → Settings → Variables and Secrets, and .env.local for dev):
- *   VITE_SUPABASE_URL       https://<project-ref>.supabase.co
- *   VITE_SUPABASE_ANON_KEY  the public anon / publishable key — never the service_role / secret key
+ * Needs two environment variables (Cloudflare Worker → Settings → Build → Variables and secrets, and .env.local for dev).
+ * Next.js inlines them at build time, so they must be read as literal `process.env.NEXT_PUBLIC_…` expressions:
+ *   NEXT_PUBLIC_SUPABASE_URL       https://<project-ref>.supabase.co
+ *   NEXT_PUBLIC_SUPABASE_ANON_KEY  the public anon / publishable key — never the service_role / secret key
  *
  * Throws on failure so the form can show an error instead of a false success.
  */
@@ -13,8 +14,8 @@ export type FormName = 'waitlist' | 'companion' | 'care'
 /** Name of the hidden field real visitors never see. Bots that fill it are silently ignored. */
 export const HONEYPOT_FIELD = 'website'
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL as string | undefined
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string | undefined
 
 const text = (data: FormData, key: string) => {
   const value = String(data.get(key) ?? '').trim()
@@ -54,7 +55,7 @@ export async function submitForm(form: FormName, data: FormData): Promise<void> 
   if (text(data, HONEYPOT_FIELD)) return
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    throw new Error('Form backend is not configured (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY).')
+    throw new Error('Form backend is not configured (NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY).')
   }
 
   const { table, row } = targets[form]

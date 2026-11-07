@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import type { Media } from '../../content/media'
 
@@ -21,11 +22,10 @@ export function Photo({ media, fallback, shape = 'rect', objectPosition = '50% 5
 
   if (media?.src) {
     return (
-      <img
+      <Image
         src={media.src}
         alt={media.alt}
         loading="lazy"
-        decoding="async"
         style={{ ...base, objectFit: 'cover', objectPosition }}
       />
     )

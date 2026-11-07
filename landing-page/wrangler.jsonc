@@ -1,0 +1,15 @@
+// Cloudflare Workers deploy config, used by `npx wrangler deploy` in Workers Builds.
+// The site is a static export (`output: 'export'` in next.config.ts), so the Worker
+// only serves the files in out/. No server code runs.
+{
+  // Must match the Worker's name in the Cloudflare dashboard.
+  "name": "linkcircle-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // Serve out/404.html, with a 404 status, for unknown URLs.
+    "not_found_handling": "404-page",
+    // /privacy redirects to /privacy/ (matches trailingSlash: true).
+    "html_handling": "auto-trailing-slash"
+  }
+}

@@ -33,7 +33,8 @@
   --line-strong: rgba(11, 27, 51, 0.14);
 
   /* Typography */
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  /* --font-jakarta is set on <html> by next/font in src/app/layout.tsx (self-hosted Plus Jakarta Sans). */
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
   --font-icons: 'Material Symbols Outlined';
   --tracking-tight: -0.04em;
   --tracking-snug: -0.02em;

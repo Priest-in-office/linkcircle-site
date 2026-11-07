@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, type CSSProperties } from 'react'
 import type { Media } from '../../content/media'
 import { useParallax } from '../../hooks/useParallax'
